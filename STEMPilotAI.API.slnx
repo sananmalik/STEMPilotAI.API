@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="STEMPilotAI.API/STEMPilotAI.API.csproj" />
+  <Project Path="STEMPilotAI.Core/STEMPilotAI.Core.csproj" Id="0475f92c-a9d1-4ba2-bffa-a94d431bab3b" />
+  <Project Path="STEMPilotAI.Infrastructure/STEMPilotAI.Infrastructure.csproj" Id="ecd21899-7537-4f07-9e93-8019f656e9e6" />
+</Solution>
