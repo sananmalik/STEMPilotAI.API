@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 function Subjects() {
   const [subjects, setSubjects] = useState([]);
@@ -27,9 +28,11 @@ function Subjects() {
         <div key={subject.subjectId}>
           <h3>{subject.subjectName}</h3>
 
-          <button>
-            Start Quiz
-          </button>
+          <button
+  onClick={() => navigate(`/quiz/${subject.subjectId}`)}
+>
+  Start Quiz
+</button>
 
           <hr />
         </div>
