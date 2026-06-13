@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const [stats, setStats] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadDashboard();
@@ -35,6 +38,10 @@ function Dashboard() {
       <p>Best Score: {stats.bestScore}</p>
 
       <p>Worst Score: {stats.worstScore}</p>
+
+      <button onClick={() => navigate("/subjects")}>
+      Take Quiz
+      </button>
     </div>
   );
 }
