@@ -7,6 +7,8 @@ function Quiz() {
 
   const [questions, setQuestions] = useState([]);
 
+  const [answers, setAnswers] = useState([]);
+
   useEffect(() => {
     loadQuestions();
   }, []);
@@ -24,6 +26,39 @@ function Quiz() {
     }
   };
 
+  const selectAnswer = (questionId, answer) => {
+  setAnswers(prev => {
+    const filtered = prev.filter(
+      a => a.questionId !== questionId
+    );
+
+    return [
+      ...filtered,
+      {
+        questionId,
+        selectedAnswer: answer
+      }
+    ];
+  });
+};
+  
+  const submitQuiz = async () => {
+  try {
+    const response = await api.post("/Quiz/submit", {
+      userId: 1,
+      subjectId: Number(subjectId),
+      answers: answers
+    });
+
+    alert(
+      `Score: ${response.data.score}/${response.data.totalQuestions}`
+    );
+  }
+  catch (error) {
+    console.log(error);
+  }
+};
+
   return (
     <div>
       <h1>Quiz</h1>
@@ -32,14 +67,54 @@ function Quiz() {
         <div key={question.questionId}>
           <h3>{question.questionText}</h3>
 
-          <p>A. {question.optionA}</p>
-          <p>B. {question.optionB}</p>
-          <p>C. {question.optionC}</p>
-          <p>D. {question.optionD}</p>
+          <label>
+  <input
+    type="radio"
+    name={`q${question.questionId}`}
+    onChange={() => selectAnswer(question.questionId, "A")}
+  />
+  A. {question.optionA}
+</label>
+
+<br />
+
+<label>
+  <input
+    type="radio"
+    name={`q${question.questionId}`}
+    onChange={() => selectAnswer(question.questionId, "B")}
+  />
+  B. {question.optionB}
+</label>
+
+<br />
+
+<label>
+  <input
+    type="radio"
+    name={`q${question.questionId}`}
+    onChange={() => selectAnswer(question.questionId, "C")}
+  />
+  C. {question.optionC}
+</label>
+
+<br />
+
+<label>
+  <input
+    type="radio"
+    name={`q${question.questionId}`}
+    onChange={() => selectAnswer(question.questionId, "D")}
+  />
+  D. {question.optionD}
+</label>
 
           <hr />
         </div>
       ))}
+      <button onClick={submitQuiz}>
+  Submit Quiz
+</button>
     </div>
   );
 }
