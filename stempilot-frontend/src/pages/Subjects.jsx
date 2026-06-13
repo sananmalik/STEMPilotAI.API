@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import api from "../services/api";
 import { useNavigate } from "react-router-dom";
+import api from "../services/api";
 
 function Subjects() {
   const [subjects, setSubjects] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadSubjects();
@@ -12,10 +14,8 @@ function Subjects() {
   const loadSubjects = async () => {
     try {
       const response = await api.get("/Subjects");
-
       setSubjects(response.data);
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
   };
@@ -29,10 +29,10 @@ function Subjects() {
           <h3>{subject.subjectName}</h3>
 
           <button
-  onClick={() => navigate(`/quiz/${subject.subjectId}`)}
->
-  Start Quiz
-</button>
+            onClick={() => navigate(`/quiz/${subject.subjectId}`)}
+          >
+            Start Quiz
+          </button>
 
           <hr />
         </div>
