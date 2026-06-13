@@ -1,9 +1,7 @@
-﻿namespace STEMPilotAI.Core.Entities;
+﻿namespace STEMPilotAI.Core.DTOs;
 
-public class Question
+public class CreateQuestionDto
 {
-    public int QuestionId { get; set; }
-
     public int SubjectId { get; set; }
 
     public string QuestionText { get; set; } = string.Empty;

@@ -12,7 +12,7 @@ using STEMPilotAI.Infrastructure.Data;
 namespace STEMPilotAI.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260613180259_AddQuestionAndQuizResultTables")]
+    [Migration("20260613181819_AddQuestionAndQuizResultTables")]
     partial class AddQuestionAndQuizResultTables
     {
         /// <inheritdoc />
@@ -82,12 +82,10 @@ namespace STEMPilotAI.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("QuizId")
+                    b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
                     b.HasKey("QuestionId");
-
-                    b.HasIndex("QuizId");
 
                     b.ToTable("Questions");
                 });
@@ -153,17 +151,6 @@ namespace STEMPilotAI.Infrastructure.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("STEMPilotAI.Core.Entities.Question", b =>
-                {
-                    b.HasOne("STEMPilotAI.Core.Entities.Quiz", "Quiz")
-                        .WithMany()
-                        .HasForeignKey("QuizId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Quiz");
                 });
 
             modelBuilder.Entity("STEMPilotAI.Core.Entities.Quiz", b =>
