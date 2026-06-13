@@ -2,6 +2,7 @@
 using STEMPilotAI.Core.DTOs;
 using STEMPilotAI.Core.Responses;
 using STEMPilotAI.Infrastructure.Data;
+using System.Linq;
 
 namespace STEMPilotAI.API.Controllers;
 
@@ -34,6 +35,29 @@ public class UsersController : ControllerBase
         {
             Success = true,
             Message = "User registered successfully"
+        });
+    }
+
+    [HttpPost("login")]
+    public IActionResult Login(LoginUserDto dto)
+    {
+        var user = _context.Users.FirstOrDefault(x =>
+            x.Email == dto.Email &&
+            x.PasswordHash == dto.Password);
+
+        if (user == null)
+        {
+            return BadRequest(new ApiResponse
+            {
+                Success = false,
+                Message = "Invalid email or password"
+            });
+        }
+
+        return Ok(new ApiResponse
+        {
+            Success = true,
+            Message = "Login successful"
         });
     }
 }
