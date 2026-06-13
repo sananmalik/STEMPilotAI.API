@@ -12,7 +12,7 @@ using STEMPilotAI.Infrastructure.Data;
 namespace STEMPilotAI.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260613175710_AddQuestionAndQuizResultTables")]
+    [Migration("20260613180259_AddQuestionAndQuizResultTables")]
     partial class AddQuestionAndQuizResultTables
     {
         /// <inheritdoc />
@@ -24,6 +24,31 @@ namespace STEMPilotAI.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("QuizResult", b =>
+                {
+                    b.Property<int>("QuizResultId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuizResultId"));
+
+                    b.Property<DateTime>("AttemptDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("QuizResultId");
+
+                    b.ToTable("QuizResults");
+                });
 
             modelBuilder.Entity("STEMPilotAI.Core.Entities.Question", b =>
                 {
