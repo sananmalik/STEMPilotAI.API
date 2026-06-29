@@ -164,7 +164,7 @@ Built for **DSH Hacks V1 — AI × STEM Education Hackathon**
 
 ## 📄 License
 
-This project was built for a hackathon. Feel free to reference or build on it.
+This project was built for a hackathon. Feel free to reference or build on it. Thankyou!
 
 ---
 
